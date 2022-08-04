@@ -1,0 +1,6 @@
+.vscode
+.swo
+.swp
+*test*
+*main*
+![0-9]*
