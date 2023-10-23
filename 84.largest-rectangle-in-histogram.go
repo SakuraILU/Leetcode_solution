@@ -1,35 +1,10 @@
 /*
- * @lc app=leetcode id=85 lang=golang
+ * @lc app=leetcode id=84 lang=golang
  *
- * [85] Maximal Rectangle
+ * [84] Largest Rectangle in Histogram
  */
 
 // @lc code=start
-var _matrix [][]byte
-
-func maximalRectangle(matrix [][]byte) (marea int) {
-	_matrix = matrix
-
-	heights := make([]int, len(matrix[0]))
-	for i := 0; i < len(matrix); i++ {
-		updateHeight(heights, i)
-		area := largestRectangleArea(heights)
-		marea = max(marea, area)
-	}
-
-	return
-}
-
-func updateHeight(heights []int, row int) {
-	for i := 0; i < len(heights); i++ {
-		if _matrix[row][i] == '1' {
-			heights[i]++
-		} else {
-			heights[i] = 0
-		}
-	}
-}
-
 func largestRectangleArea(heights []int) (marea int) {
 	presmallers := findPreSmallers(heights)
 	nextsmallers := findNextSmallers(heights)
