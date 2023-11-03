@@ -5,28 +5,40 @@
  */
 
 // @lc code=start
+
 func find132pattern(nums []int) bool {
-	queue := make([]int, 0)
-	for i := 0; i < len(nums)-2; i++ {
-		for len(queue) > 0 && nums[i] <= queue[len(queue)-1] {
-			queue = queue[0 : len(queue)-1]
-		}
-		queue = append(queue, nums[i])
-		low := queue[0]
-		top := nums[i+1]
+	leftmins := make([]int, len(nums))
+	leftmins[0] = nums[0]
+	for i := 1; i < len(nums); i++ {
+		leftmins[i] = min(leftmins[i-1], nums[i])
+	}
 
-		if top <= low {
-			continue
+	decstack := make([]int, 0)
+
+	for i := 0; i < len(nums); i++ {
+		for len(decstack) > 0 && nums[i] >= nums[decstack[len(decstack)-1]] {
+			decstack = decstack[0 : len(decstack)-1]
 		}
 
-		for j := i + 2; j < len(nums); j++ {
-			if nums[j] > low && nums[j] < top {
+		if len(decstack) > 0 {
+			second := decstack[len(decstack)-1]
+			if second > 0 && leftmins[second-1] < nums[i] {
 				return true
 			}
 		}
+
+		decstack = append(decstack, i)
 	}
 
 	return false
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	} else {
+		return b
+	}
 }
 
 // @lc code=end

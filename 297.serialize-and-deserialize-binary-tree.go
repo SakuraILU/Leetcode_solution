@@ -14,20 +14,6 @@
  * }
  */
 
-// package leetcodesolution
-
-// import (
-// 	"fmt"
-// 	"strconv"
-// 	"strings"
-// )
-
-// type TreeNode struct {
-// 	Val   int
-// 	Left  *TreeNode
-// 	Right *TreeNode
-// }
-
 const (
 	NULL = "#"
 	SEP  = " "
