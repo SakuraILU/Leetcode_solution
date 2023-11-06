@@ -15,24 +15,25 @@
 
 func partition(head *ListNode, x int) *ListNode {
 	dummy := &ListNode{Next: head}
-	slow := dummy
+	first := dummy
 
-	for slow.Next != nil && slow.Next.Val < x {
-		slow = slow.Next
+	for first.Next != nil && first.Next.Val < x {
+		first = first.Next
 	}
-	fast := slow
+	second := first
 
-	for fast.Next != nil {
-		if fast.Next.Val < x {
-			target := fast.Next
-			fast.Next = target.Next
+	for second.Next != nil {
+		if second.Next.Val < x {
+			// move second.Next to first.Next
+			target := second.Next
+			second.Next = target.Next
 
-			target.Next = slow.Next
-			slow.Next = target
+			target.Next = first.Next
+			first.Next = target
 
-			slow = slow.Next
+			first = first.Next
 		} else {
-			fast = fast.Next
+			second = second.Next
 		}
 	}
 
